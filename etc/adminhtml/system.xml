@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="blackaha_pricing_updater" translate="label" sortOrder="900" showInDefault="1" showInWebsite="0" showInStore="0">
+            <label>Blackaha Pricing Updater</label>
+            <tab>catalog</tab>
+            <resource>Blackaha_PricingUpdater::config</resource>
+            <group id="general" translate="label comment" sortOrder="10" showInDefault="1">
+                <label>Price updates</label>
+                <comment>The connection itself is managed in Catalog > Pricing Updater.</comment>
+                <field id="website_id" translate="label comment" type="select" sortOrder="10" showInDefault="1">
+                    <label>Website for price updates</label>
+                    <comment>Used only when Catalog > Price > Catalog Price Scope is "Website". Prices are written to this one website, never to all websites at once. With a single website it is used automatically.</comment>
+                    <source_model>Blackaha\PricingUpdater\Model\Config\Source\Website</source_model>
+                </field>
+                <field id="ledger_retention_days" translate="label comment" type="text" sortOrder="20" showInDefault="1">
+                    <label>Keep results for (days)</label>
+                    <comment>A repeated update is answered from these results instead of being applied again. At least 1.</comment>
+                    <validate>required-entry validate-digits validate-greater-than-zero</validate>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

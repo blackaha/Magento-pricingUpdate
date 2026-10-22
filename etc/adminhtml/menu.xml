@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Blackaha_PricingUpdater::connection"
+             title="Pricing Updater"
+             translate="title"
+             module="Blackaha_PricingUpdater"
+             sortOrder="100"
+             parent="Magento_Catalog::catalog"
+             action="pricingupdater/connection/index"
+             resource="Blackaha_PricingUpdater::manage"/>
+    </menu>
+</config>

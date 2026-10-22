@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!--
+    Real tables rather than cache entries: a cache may be flushed at any time, and
+    losing a recorded result would let the same update be applied twice.
+-->
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="blackaha_pricing_updater_ledger" resource="default" engine="innodb" comment="Pricing Updater: final result of each update">
+        <column xsi:type="varchar" name="update_id" length="64" nullable="false" comment="Update id sent by the pricing service"/>
+        <column xsi:type="varchar" name="batch_id" length="64" nullable="false" default="" comment="Batch that concluded the update"/>
+        <column xsi:type="varchar" name="sku" length="191" nullable="false" default="" comment="SKU"/>
+        <column xsi:type="varchar" name="status" length="16" nullable="false" comment="applied or failed"/>
+        <column xsi:type="decimal" name="applied_price" scale="8" precision="26" unsigned="false" nullable="true" comment="Price now in effect"/>
+        <column xsi:type="varchar" name="reference" length="200" nullable="true" comment="Store reference"/>
+        <column xsi:type="text" name="message" nullable="true" comment="Reason of a failure"/>
+        <column xsi:type="datetime" name="created_at" nullable="false" comment="Concluded at, UTC"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="update_id"/>
+        </constraint>
+        <index referenceId="BLACKAHA_PRICING_UPDATER_LEDGER_CREATED_AT" indexType="btree">
+            <column name="created_at"/>
+        </index>
+    </table>
+    <table name="blackaha_pricing_updater_nonce" resource="default" engine="innodb" comment="Pricing Updater: nonces already received">
+        <column xsi:type="varchar" name="nonce" length="32" nullable="false" comment="Nonce"/>
+        <column xsi:type="int" name="seen_at" unsigned="true" nullable="false" comment="Unix time"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="nonce"/>
+        </constraint>
+        <index referenceId="BLACKAHA_PRICING_UPDATER_NONCE_SEEN_AT" indexType="btree">
+            <column name="seen_at"/>
+        </index>
+    </table>
+</schema>

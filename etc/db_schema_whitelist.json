@@ -1,0 +1,32 @@
+{
+    "blackaha_pricing_updater_ledger": {
+        "column": {
+            "update_id": true,
+            "batch_id": true,
+            "sku": true,
+            "status": true,
+            "applied_price": true,
+            "reference": true,
+            "message": true,
+            "created_at": true
+        },
+        "index": {
+            "BLACKAHA_PRICING_UPDATER_LEDGER_CREATED_AT": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+    "blackaha_pricing_updater_nonce": {
+        "column": {
+            "nonce": true,
+            "seen_at": true
+        },
+        "index": {
+            "BLACKAHA_PRICING_UPDATER_NONCE_SEEN_AT": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    }
+}

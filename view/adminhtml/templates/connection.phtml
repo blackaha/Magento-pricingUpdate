@@ -1,0 +1,186 @@
+<?php
+/**
+ * @var \Blackaha\PricingUpdater\Block\Adminhtml\Connection $block
+ * @var \Magento\Framework\Escaper $escaper
+ */
+
+$state = $block->getState();
+$connection = $block->getConnection();
+$scope = $block->getScope();
+$service = $block->getServiceName();
+$notice = $block->getNotice();
+$check = '<svg viewBox="0 0 24 24" width="28" height="28" focusable="false" aria-hidden="true"><path fill="currentColor" d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg>';
+
+$button = static function (string $url, string $label, string $class, bool $disabled = false) use ($block, $escaper): string {
+    return '<form method="post" action="' . $escaper->escapeUrl($url) . '" class="pricing-updater-inline-form">'
+        . $block->getBlockHtml('formkey')
+        . '<button type="submit" class="' . $escaper->escapeHtmlAttr($class) . '"' . ($disabled ? ' disabled' : '') . '>'
+        . $escaper->escapeHtml($label) . '</button></form>';
+};
+?>
+<div class="pricing-updater">
+    <?php if ($notice): ?>
+        <div class="messages">
+            <div class="message message-<?= $escaper->escapeHtmlAttr($notice[0]) ?> <?= $escaper->escapeHtmlAttr($notice[0]) ?>">
+                <div><?= $escaper->escapeHtml($notice[1]) ?></div>
+            </div>
+        </div>
+    <?php endif; ?>
+
+    <?php if ('connected' === $state): ?>
+        <?php $verified = max((int) $connection['last_test_at'], (int) $connection['last_update_at']); ?>
+        <div class="pricing-updater-card pricing-updater-card--connected">
+            <div class="pricing-updater-card__icon pricing-updater-card__icon--ok"><?= /* @noEscape */ $check ?></div>
+            <h2 class="pricing-updater-card__title"><?= $escaper->escapeHtml(__('Connected')) ?></h2>
+            <p class="pricing-updater-card__text">
+                <?= $escaper->escapeHtml(__('Verified on %1. Prices sent to this store are applied automatically, matched by SKU.', $block->formatTimestamp($verified))) ?>
+            </p>
+            <dl class="pricing-updater-facts">
+                <?php if ($connection['last_test_at']): ?>
+                    <dt><?= $escaper->escapeHtml(__('Last connection test')) ?></dt>
+                    <dd><?= $escaper->escapeHtml($block->formatTimestamp((int) $connection['last_test_at'])) ?></dd>
+                <?php endif; ?>
+                <?php if ($connection['last_update_at']): ?>
+                    <dt><?= $escaper->escapeHtml(__('Last price update')) ?></dt>
+                    <dd><?= $escaper->escapeHtml($block->formatTimestamp((int) $connection['last_update_at'])) ?></dd>
+                <?php endif; ?>
+                <dt><?= $escaper->escapeHtml(__('Accepted prices')) ?></dt>
+                <dd><?= $escaper->escapeHtml(__('%1, up to %2 decimals', $scope['currency'], 2)) ?></dd>
+                <dt><?= $escaper->escapeHtml(__('Price scope')) ?></dt>
+                <dd>
+                    <?= $escaper->escapeHtml($scope['website_id'] ? __('Website: %1', $scope['website_name']) : __('Global')) ?>
+                </dd>
+            </dl>
+            <div class="pricing-updater-card__actions">
+                <?= /* @noEscape */ $button($block->getActionUrl('start'), (string) __('Reconnect'), 'action-secondary') ?>
+                <?= /* @noEscape */ $button($block->getActionUrl('disconnect'), (string) __('Disconnect'), 'action-tertiary pricing-updater-danger') ?>
+            </div>
+        </div>
+    <?php elseif ('configured' === $state): ?>
+        <?php $settingsUrl = $block->getServiceSettingsUrl(); ?>
+        <?php $path = (string) __('Workspace Settings → Pricing rules → Store connection'); ?>
+        <div class="pricing-updater-card">
+            <div class="pricing-updater-card__icon pricing-updater-card__icon--ok"><?= /* @noEscape */ $check ?></div>
+            <h2 class="pricing-updater-card__title"><?= $escaper->escapeHtml(__('Configuration successful')) ?></h2>
+            <p class="pricing-updater-card__text">
+                <?= /* @noEscape */ __(
+                    'Check the connection status in %1, then click Test connection.',
+                    '' !== $settingsUrl
+                        ? '<a href="' . $escaper->escapeUrl($settingsUrl) . '" target="_blank" rel="noopener noreferrer">' . $escaper->escapeHtml($path) . '</a>'
+                        : $escaper->escapeHtml($path)
+                ) ?>
+            </p>
+            <div class="pricing-updater-card__actions">
+                <?= /* @noEscape */ $button($block->getActionUrl('start'), (string) __('Reconnect'), 'action-secondary') ?>
+                <?= /* @noEscape */ $button($block->getActionUrl('disconnect'), (string) __('Disconnect'), 'action-tertiary pricing-updater-danger') ?>
+            </div>
+        </div>
+    <?php else: ?>
+        <?php $problem = $block->getSiteProblem(); ?>
+        <div class="pricing-updater-card">
+            <h2 class="pricing-updater-card__title"><?= $escaper->escapeHtml(__('Connect your store to %1', $service)) ?></h2>
+            <p class="pricing-updater-card__text">
+                <?= $escaper->escapeHtml(__('Approve the connection in your %1 account: the prices it sends are then applied to your products, matched by SKU. Takes about a minute.', $service)) ?>
+            </p>
+            <ul class="pricing-updater-checks">
+                <li class="pricing-updater-check pricing-updater-check--<?= null === $problem ? 'ok' : 'warn' ?>">
+                    <?= $escaper->escapeHtml($problem ?? __('Your store is served over HTTPS on a public domain.')) ?>
+                </li>
+                <li class="pricing-updater-check pricing-updater-check--<?= null === $scope['error'] ? 'ok' : 'warn' ?>">
+                    <?php if (null === $scope['error']): ?>
+                        <?= $escaper->escapeHtml(__('Prices will be accepted in %1 with up to %2 decimals, the base currency of the store.', $scope['currency'], 2)) ?>
+                    <?php else: ?>
+                        <a href="<?= $escaper->escapeUrl($block->getConfigUrl()) ?>"><?= $escaper->escapeHtml($scope['error']) ?></a>
+                    <?php endif; ?>
+                </li>
+            </ul>
+            <div class="pricing-updater-card__actions">
+                <?= /* @noEscape */ $button($block->getActionUrl('start'), (string) __('Connect to %1', $service), 'action-primary', null !== $problem) ?>
+            </div>
+            <p class="pricing-updater-card__hint">
+                <?= $escaper->escapeHtml(__('You will be asked to sign in to %1, approve the connection, and will then be brought back here.', $service)) ?>
+            </p>
+        </div>
+    <?php endif; ?>
+
+    <?php $manualUrl = $block->getManualUrl(); ?>
+    <details class="pricing-updater-manual"<?= $block->connectWentWrong() ? ' open' : '' ?>>
+        <summary><?= $escaper->escapeHtml(__('Connect manually')) ?></summary>
+        <p class="note">
+            <?php if ('' !== $manualUrl): ?>
+                <?= /* @noEscape */ __(
+                    'Copy the webhook URL below into %1, then paste the signing secret you are given there.',
+                    '<a href="' . $escaper->escapeUrl($manualUrl) . '" target="_blank" rel="noopener noreferrer">'
+                    . $escaper->escapeHtml(__('the store connection settings in %1', $service)) . '</a>'
+                ) ?>
+            <?php else: ?>
+                <?= $escaper->escapeHtml(__('Copy the webhook URL below into the store connection settings of your pricing service, then paste the signing secret you are given there.')) ?>
+            <?php endif; ?>
+        </p>
+        <form method="post" action="<?= $escaper->escapeUrl($block->getActionUrl('saveSecret')) ?>" class="pricing-updater-form">
+            <?= $block->getBlockHtml('formkey') ?>
+            <div class="pricing-updater-field">
+                <label for="pricing-updater-webhook-url"><?= $escaper->escapeHtml(__('Webhook URL')) ?></label>
+                <div class="pricing-updater-copy-row">
+                    <input type="text" id="pricing-updater-webhook-url" class="admin__control-text" readonly
+                           value="<?= $escaper->escapeHtmlAttr($block->getWebhookUrl()) ?>"/>
+                    <button type="button" class="action-secondary" id="pricing-updater-copy"
+                            data-target="pricing-updater-webhook-url"
+                            data-copied="<?= $escaper->escapeHtmlAttr(__('Copied')) ?>"><?= $escaper->escapeHtml(__('Copy')) ?></button>
+                </div>
+            </div>
+            <div class="pricing-updater-field">
+                <label for="pricing-updater-secret"><?= $escaper->escapeHtml(__('Signing secret')) ?></label>
+                <input type="password" id="pricing-updater-secret" name="pricing_updater_secret" class="admin__control-text"
+                       autocomplete="off" spellcheck="false" required/>
+                <p class="note">
+                    <?= $escaper->escapeHtml($block->hasSecret()
+                        ? __('A signing secret is saved and is never shown. Saving a new one replaces it.')
+                        : __('The store refuses every price update until a secret is saved.')) ?>
+                </p>
+            </div>
+            <button type="submit" class="action-secondary"><?= $escaper->escapeHtml(__('Save signing secret')) ?></button>
+        </form>
+    </details>
+
+    <h2 class="pricing-updater-heading"><?= $escaper->escapeHtml(__('Recent price updates')) ?></h2>
+    <?php $rows = $block->getRecent(); ?>
+    <?php if (!$rows): ?>
+        <p><?= $escaper->escapeHtml(__('No price update has been received yet.')) ?></p>
+    <?php else: ?>
+        <table class="data-grid">
+            <thead>
+                <tr>
+                    <th class="data-grid-th"><?= $escaper->escapeHtml(__('Received')) ?></th>
+                    <th class="data-grid-th"><?= $escaper->escapeHtml(__('SKU')) ?></th>
+                    <th class="data-grid-th"><?= $escaper->escapeHtml(__('Result')) ?></th>
+                    <th class="data-grid-th"><?= $escaper->escapeHtml(__('Price')) ?></th>
+                    <th class="data-grid-th"><?= $escaper->escapeHtml(__('Details')) ?></th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($rows as $row): ?>
+                    <?php $applied = $block->isApplied($row); ?>
+                    <?php $editUrl = $block->getProductEditUrl((string) $row['reference']); ?>
+                    <tr>
+                        <td><?= $escaper->escapeHtml($block->formatUtc((string) $row['created_at'])) ?></td>
+                        <td>
+                            <?php if ('' !== $editUrl): ?>
+                                <a href="<?= $escaper->escapeUrl($editUrl) ?>"><?= $escaper->escapeHtml($row['sku']) ?></a>
+                            <?php else: ?>
+                                <?= $escaper->escapeHtml($row['sku']) ?>
+                            <?php endif; ?>
+                        </td>
+                        <td>
+                            <span class="pricing-updater-badge pricing-updater-badge--<?= $applied ? 'ok' : 'failed' ?>">
+                                <?= $escaper->escapeHtml($applied ? __('Applied') : __('Not applied')) ?>
+                            </span>
+                        </td>
+                        <td><?= $applied ? $escaper->escapeHtml($block->formatPrice((float) $row['applied_price'])) : '&ndash;' ?></td>
+                        <td><?= $escaper->escapeHtml((string) $row['message']) ?></td>
+                    </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+    <?php endif; ?>
+</div>
