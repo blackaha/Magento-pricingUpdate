@@ -4,7 +4,7 @@
  */
 declare(strict_types=1);
 
-namespace Blackaha\PricingUpdater\Model;
+namespace BlackAha\DynamicPricing\Model;
 
 use Magento\Directory\Model\Currency;
 use Magento\Framework\App\Config\ScopeConfigInterface;
@@ -65,7 +65,7 @@ class PriceScope
 
         if (!$website || !$store) {
             $scope['error'] = (string) __(
-                'The store sets prices per website, and no website is chosen for price updates in Stores > Configuration > Catalog > Blackaha Pricing Updater, so the price was not changed.'
+                'The store sets prices per website, and no website is chosen for price updates in Stores > Configuration > Catalog > BlackAha Pricing Updater, so the price was not changed.'
             );
 
             return $scope;

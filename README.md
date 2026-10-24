@@ -25,8 +25,8 @@ didn't. You stay in control: nothing is converted, rounded or guessed.
 ### With Composer (recommended)
 
 ```bash
-composer require blackaha/module-pricing-updater
-bin/magento module:enable Blackaha_PricingUpdater
+composer require blackaha/module-dynamic-pricing
+bin/magento module:enable BlackAha_DynamicPricing
 bin/magento setup:upgrade
 bin/magento setup:di:compile        # production mode only
 bin/magento setup:static-content:deploy   # production mode only
@@ -35,8 +35,8 @@ bin/magento cache:flush
 
 ### From the zip file
 
-1. Unzip the package into `app/code/Blackaha/PricingUpdater/` of your Magento installation, so that
-   `app/code/Blackaha/PricingUpdater/registration.php` exists.
+1. Unzip the package into `app/code/BlackAha/DynamicPricing/` of your Magento installation, so that
+   `app/code/BlackAha/DynamicPricing/registration.php` exists.
 2. Run the same `bin/magento` commands as above, from `module:enable` on.
 
 After installation, sign out of the Magento admin and sign in again so that the new menu entry appears.
@@ -74,7 +74,7 @@ Keep the signing secret private. It is stored encrypted, never shown again, and 
 
 ## Settings
 
-*Stores → Configuration → Catalog → Blackaha Pricing Updater → Price updates*
+*Stores → Configuration → Catalog → BlackAha Pricing Updater → Price updates*
 
 - **Website for price updates**: used only when *Stores → Configuration → Catalog → Catalog → Price → Catalog Price Scope* is **Website**.
   Prices are written to this one website, never to all websites at once. With a single website it is chosen
@@ -113,7 +113,7 @@ not applied, the reason.
 | *Your server clock is more than a day off…* | Ask your host to correct the server time, or connect manually. |
 | *Too many connection attempts.* | Wait the number of seconds shown, then try again. |
 | *Connection cancelled.* | You declined the connection in BlackAha. Click **Connect** again when you are ready. |
-| The connection test in BlackAha fails | Allow requests to `/pricingupdater/` in Cloudflare, your firewall or WAF, and make sure Varnish or any page cache passes POST requests to `/pricingupdater/` through. Turn off maintenance mode (`bin/magento maintenance:status`). |
+| The connection test in BlackAha fails | Allow requests to `/dynamicpricing/` in Cloudflare, your firewall or WAF, and make sure Varnish or any page cache passes POST requests to `/dynamicpricing/` through. Turn off maintenance mode (`bin/magento maintenance:status`). |
 | *No product with SKU "…" was found in the store.* | Add the SKU to the product, exactly as it is written in BlackAha. |
 | *SKU "…" belongs to a configurable product…* | Use the SKU of the simple product (the variant) in BlackAha. |
 | *The price is in EUR but the store's base currency is USD.* | Use the same currency in BlackAha and in Magento. Prices are never converted. |
@@ -121,17 +121,17 @@ not applied, the reason.
 | *The store did not keep the new price: … the product sells at …* | A catalog price rule, a tier price or another extension changes the price. Adjust it, then send the price again. |
 | The menu entry does not appear | Sign out of the admin and sign in again; check that your admin role has *Catalog → Pricing Updater* allowed (*System → Permissions → User Roles*). |
 
-The module writes connection problems (never secrets) to `var/log/pricing_updater.log`. Please include the relevant
+The module writes connection problems (never secrets) to `var/log/dynamic_pricing.log`. Please include the relevant
 lines when you contact support.
 
 ## Disconnecting and uninstalling
 
 - **Disconnect** (on the Pricing Updater page) removes the signing secret: the store refuses price updates until it
   is connected again.
-- Installed with Composer: `bin/magento module:uninstall Blackaha_PricingUpdater` removes the module, its tables and
+- Installed with Composer: `bin/magento module:uninstall BlackAha_DynamicPricing` removes the module, its tables and
   its settings. Prices already applied stay as they are.
-- Installed from the zip: `bin/magento module:disable Blackaha_PricingUpdater`, delete
-  `app/code/Blackaha/PricingUpdater/`, then `bin/magento setup:upgrade`.
+- Installed from the zip: `bin/magento module:disable BlackAha_DynamicPricing`, delete
+  `app/code/BlackAha/DynamicPricing/`, then `bin/magento setup:upgrade`.
 
 ## Privacy
 

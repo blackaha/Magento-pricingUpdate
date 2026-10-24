@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Blackaha\PricingUpdater\Model\Config\Source;
+namespace BlackAha\DynamicPricing\Model\Config\Source;
 
 use Magento\Framework\Data\OptionSourceInterface;
 use Magento\Store\Model\StoreManagerInterface;

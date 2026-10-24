@@ -1,5 +1,5 @@
 {
-    "name": "blackaha/module-pricing-updater",
+    "name": "blackaha/module-dynamic-pricing",
     "description": "Keeps your Magento product prices in line with the prices you set in BlackAha: matched by SKU, applied automatically, every result reported back.",
     "type": "magento2-module",
     "version": "1.0.0",
@@ -46,7 +46,7 @@
             "registration.php"
         ],
         "psr-4": {
-            "Blackaha\\PricingUpdater\\": ""
+            "BlackAha\\DynamicPricing\\": ""
         }
     }
 }

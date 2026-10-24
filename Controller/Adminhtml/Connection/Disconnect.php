@@ -4,9 +4,9 @@
  */
 declare(strict_types=1);
 
-namespace Blackaha\PricingUpdater\Controller\Adminhtml\Connection;
+namespace BlackAha\DynamicPricing\Controller\Adminhtml\Connection;
 
-use Blackaha\PricingUpdater\Model\Settings;
+use BlackAha\DynamicPricing\Model\Settings;
 use Magento\Backend\App\Action;
 use Magento\Backend\App\Action\Context;
 use Magento\Framework\App\Action\HttpPostActionInterface;
@@ -14,7 +14,7 @@ use Magento\Framework\Controller\Result\Redirect;
 
 class Disconnect extends Action implements HttpPostActionInterface
 {
-    public const ADMIN_RESOURCE = 'Blackaha_PricingUpdater::manage';
+    public const ADMIN_RESOURCE = 'BlackAha_DynamicPricing::manage';
 
     public function __construct(
         Context $context,
@@ -28,8 +28,8 @@ class Disconnect extends Action implements HttpPostActionInterface
         $this->settings->deleteSecret();
 
         return $this->resultRedirectFactory->create()->setPath(
-            'pricingupdater/connection/index',
-            ['_query' => ['pricing_updater_notice' => 'disconnected']]
+            'dynamicpricing/connection/index',
+            ['_query' => ['dynamic_pricing_notice' => 'disconnected']]
         );
     }
 }

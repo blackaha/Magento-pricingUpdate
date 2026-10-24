@@ -4,14 +4,14 @@
  */
 declare(strict_types=1);
 
-namespace Blackaha\PricingUpdater\Block\Adminhtml;
+namespace BlackAha\DynamicPricing\Block\Adminhtml;
 
-use Blackaha\PricingUpdater\Model\Connector;
-use Blackaha\PricingUpdater\Model\Ledger;
-use Blackaha\PricingUpdater\Model\PriceScope;
-use Blackaha\PricingUpdater\Model\Protocol;
-use Blackaha\PricingUpdater\Model\Settings;
-use Blackaha\PricingUpdater\Model\Urls;
+use BlackAha\DynamicPricing\Model\Connector;
+use BlackAha\DynamicPricing\Model\Ledger;
+use BlackAha\DynamicPricing\Model\PriceScope;
+use BlackAha\DynamicPricing\Model\Protocol;
+use BlackAha\DynamicPricing\Model\Settings;
+use BlackAha\DynamicPricing\Model\Urls;
 use Magento\Backend\Block\Template;
 use Magento\Backend\Block\Template\Context;
 use Magento\Framework\Pricing\PriceCurrencyInterface;
@@ -25,7 +25,7 @@ class Connection extends Template
     /**
      * @var string
      */
-    protected $_template = 'Blackaha_PricingUpdater::connection.phtml';
+    protected $_template = 'BlackAha_DynamicPricing::connection.phtml';
 
     private ?array $scope = null;
 
@@ -110,12 +110,12 @@ class Connection extends Template
 
     public function getActionUrl(string $action): string
     {
-        return $this->getUrl('pricingupdater/connection/' . $action);
+        return $this->getUrl('dynamicpricing/connection/' . $action);
     }
 
     public function getConfigUrl(): string
     {
-        return $this->getUrl('adminhtml/system_config/edit', ['section' => 'blackaha_pricing_updater']);
+        return $this->getUrl('adminhtml/system_config/edit', ['section' => 'blackaha_dynamic_pricing']);
     }
 
     /**
@@ -143,7 +143,7 @@ class Connection extends Template
             ],
             'connect_failed' => [
                 'error',
-                $this->connector->takeError((string) $this->getRequest()->getParam('pricing_updater_error'))
+                $this->connector->takeError((string) $this->getRequest()->getParam('dynamic_pricing_error'))
                     ?: __('The connection could not be completed. Please start again, or connect manually below.'),
             ],
             default => null,
@@ -152,7 +152,7 @@ class Connection extends Template
 
     private function noticeKey(): string
     {
-        return (string) $this->getRequest()->getParam('pricing_updater_notice');
+        return (string) $this->getRequest()->getParam('dynamic_pricing_notice');
     }
 
     /**

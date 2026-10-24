@@ -4,7 +4,7 @@
  */
 declare(strict_types=1);
 
-namespace Blackaha\PricingUpdater\Model;
+namespace BlackAha\DynamicPricing\Model;
 
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\App\DeploymentConfig;
@@ -22,16 +22,16 @@ use Magento\Framework\Math\Random;
  */
 class Settings
 {
-    public const FLAG_SECRET = 'blackaha_pricing_updater_secret';
-    public const FLAG_SLUG = 'blackaha_pricing_updater_webhook_slug';
-    public const FLAG_CONNECTION = 'blackaha_pricing_updater_connection';
-    public const FLAG_ADMIN_URL = 'blackaha_pricing_updater_admin_url';
+    public const FLAG_SECRET = 'blackaha_dynamic_pricing_secret';
+    public const FLAG_SLUG = 'blackaha_dynamic_pricing_webhook_slug';
+    public const FLAG_CONNECTION = 'blackaha_dynamic_pricing_connection';
+    public const FLAG_ADMIN_URL = 'blackaha_dynamic_pricing_admin_url';
 
-    public const XML_PATH_WEBSITE_ID = 'blackaha_pricing_updater/general/website_id';
-    public const XML_PATH_RETENTION_DAYS = 'blackaha_pricing_updater/general/ledger_retention_days';
+    public const XML_PATH_WEBSITE_ID = 'blackaha_dynamic_pricing/general/website_id';
+    public const XML_PATH_RETENTION_DAYS = 'blackaha_dynamic_pricing/general/ledger_retention_days';
 
     /** env.php key that overrides the pricing service address, for staging and development. */
-    public const ENV_SERVICE_URL = 'blackaha_pricing_updater/service_url';
+    public const ENV_SERVICE_URL = 'blackaha_dynamic_pricing/service_url';
 
     public const DEFAULT_SERVICE_URL = 'https://app.blackaha.com';
     public const SERVICE_NAME = 'BlackAha';

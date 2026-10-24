@@ -4,9 +4,9 @@
  */
 declare(strict_types=1);
 
-namespace Blackaha\PricingUpdater\Model;
+namespace BlackAha\DynamicPricing\Model;
 
-use Blackaha\PricingUpdater\Exception\HttpException;
+use BlackAha\DynamicPricing\Exception\HttpException;
 use Magento\Catalog\Api\ProductRepositoryInterface;
 use Magento\Catalog\Model\Indexer\Product\Price\Processor as PriceIndexer;
 use Magento\Catalog\Model\Product;
@@ -105,7 +105,7 @@ class Writer
         // Lets another module protect a product: set "allowed" to false, and "reason" to say why.
         $transport = new DataObject(['allowed' => true, 'reason' => '']);
         $this->eventManager->dispatch(
-            'blackaha_pricing_updater_allow_price_update',
+            'blackaha_dynamic_pricing_allow_price_update',
             ['transport' => $transport, 'product' => $product, 'item' => $item]
         );
 
@@ -157,7 +157,7 @@ class Writer
 
         if ($this->sellsAt($saved, $target)) {
             $this->eventManager->dispatch(
-                'blackaha_pricing_updater_price_applied',
+                'blackaha_dynamic_pricing_price_applied',
                 ['product' => $saved, 'price' => $target, 'item' => $item]
             );
 

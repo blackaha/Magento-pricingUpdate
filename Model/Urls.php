@@ -4,7 +4,7 @@
  */
 declare(strict_types=1);
 
-namespace Blackaha\PricingUpdater\Model;
+namespace BlackAha\DynamicPricing\Model;
 
 use Magento\Framework\App\State;
 use Magento\Framework\UrlInterface;
@@ -20,9 +20,9 @@ use Magento\Store\Model\StoreManagerInterface;
  */
 class Urls
 {
-    public const ROUTE_WEBHOOK = 'pricingupdater/webhook/index/slug/';
-    public const ROUTE_VERIFY = 'pricingupdater/connect/verify';
-    public const ROUTE_CALLBACK = 'pricingupdater/connect/callback';
+    public const ROUTE_WEBHOOK = 'dynamicpricing/webhook/index/slug/';
+    public const ROUTE_VERIFY = 'dynamicpricing/connect/verify';
+    public const ROUTE_CALLBACK = 'dynamicpricing/connect/callback';
 
     /** Host suffixes that never denote a public site. */
     private const INTERNAL_SUFFIXES = [

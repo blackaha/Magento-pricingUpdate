@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace Blackaha\PricingUpdater\Cron;
+namespace BlackAha\DynamicPricing\Cron;
 
-use Blackaha\PricingUpdater\Model\Ledger;
-use Blackaha\PricingUpdater\Model\Settings;
+use BlackAha\DynamicPricing\Model\Ledger;
+use BlackAha\DynamicPricing\Model\Settings;
 
 /**
  * Deletes results and nonces that are no longer needed. Runs daily.

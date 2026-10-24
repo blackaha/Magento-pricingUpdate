@@ -1,16 +1,16 @@
 <?php
 /**
- * The webhook endpoint: POST <store>/pricingupdater/webhook/index/slug/<slug>
+ * The webhook endpoint: POST <store>/dynamicpricing/webhook/index/slug/<slug>
  */
 declare(strict_types=1);
 
-namespace Blackaha\PricingUpdater\Controller\Webhook;
+namespace BlackAha\DynamicPricing\Controller\Webhook;
 
-use Blackaha\PricingUpdater\Exception\HttpException;
-use Blackaha\PricingUpdater\Model\Processor;
-use Blackaha\PricingUpdater\Model\Protocol;
-use Blackaha\PricingUpdater\Model\Settings;
-use Blackaha\PricingUpdater\Model\Verifier;
+use BlackAha\DynamicPricing\Exception\HttpException;
+use BlackAha\DynamicPricing\Model\Processor;
+use BlackAha\DynamicPricing\Model\Protocol;
+use BlackAha\DynamicPricing\Model\Settings;
+use BlackAha\DynamicPricing\Model\Verifier;
 use Magento\Framework\App\Action\HttpGetActionInterface;
 use Magento\Framework\App\Action\HttpPostActionInterface;
 use Magento\Framework\App\CsrfAwareActionInterface;

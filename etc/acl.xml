@@ -4,12 +4,12 @@
         <resources>
             <resource id="Magento_Backend::admin">
                 <resource id="Magento_Catalog::catalog">
-                    <resource id="Blackaha_PricingUpdater::manage" title="Pricing Updater" translate="title" sortOrder="100"/>
+                    <resource id="BlackAha_DynamicPricing::manage" title="Pricing Updater" translate="title" sortOrder="100"/>
                 </resource>
                 <resource id="Magento_Backend::stores">
                     <resource id="Magento_Backend::stores_settings">
                         <resource id="Magento_Config::config">
-                            <resource id="Blackaha_PricingUpdater::config" title="Pricing Updater" translate="title" sortOrder="100"/>
+                            <resource id="BlackAha_DynamicPricing::config" title="Pricing Updater" translate="title" sortOrder="100"/>
                         </resource>
                     </resource>
                 </resource>

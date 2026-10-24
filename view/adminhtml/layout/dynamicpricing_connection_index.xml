@@ -1,12 +1,12 @@
 <?xml version="1.0"?>
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <head>
-        <css src="Blackaha_PricingUpdater::css/connection.css"/>
-        <script src="Blackaha_PricingUpdater::js/connection.js"/>
+        <css src="BlackAha_DynamicPricing::css/connection.css"/>
+        <script src="BlackAha_DynamicPricing::js/connection.js"/>
     </head>
     <body>
         <referenceContainer name="content">
-            <block class="Blackaha\PricingUpdater\Block\Adminhtml\Connection" name="blackaha.pricing.updater.connection"/>
+            <block class="BlackAha\DynamicPricing\Block\Adminhtml\Connection" name="blackaha.dynamic.pricing.connection"/>
         </referenceContainer>
     </body>
 </page>

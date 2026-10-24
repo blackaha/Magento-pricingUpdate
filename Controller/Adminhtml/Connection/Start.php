@@ -4,11 +4,11 @@
  */
 declare(strict_types=1);
 
-namespace Blackaha\PricingUpdater\Controller\Adminhtml\Connection;
+namespace BlackAha\DynamicPricing\Controller\Adminhtml\Connection;
 
-use Blackaha\PricingUpdater\Exception\ConnectException;
-use Blackaha\PricingUpdater\Model\Connector;
-use Blackaha\PricingUpdater\Model\Settings;
+use BlackAha\DynamicPricing\Exception\ConnectException;
+use BlackAha\DynamicPricing\Model\Connector;
+use BlackAha\DynamicPricing\Model\Settings;
 use Magento\Backend\App\Action;
 use Magento\Backend\App\Action\Context;
 use Magento\Framework\App\Action\HttpPostActionInterface;
@@ -19,7 +19,7 @@ use Magento\Framework\Controller\Result\Redirect;
  */
 class Start extends Action implements HttpPostActionInterface
 {
-    public const ADMIN_RESOURCE = 'Blackaha_PricingUpdater::manage';
+    public const ADMIN_RESOURCE = 'BlackAha_DynamicPricing::manage';
 
     public function __construct(
         Context $context,
@@ -32,24 +32,24 @@ class Start extends Action implements HttpPostActionInterface
     public function execute(): Redirect
     {
         $redirect = $this->resultRedirectFactory->create();
-        $returnUrl = $this->getUrl('pricingupdater/connection/index', ['_nosecret' => true]);
+        $returnUrl = $this->getUrl('dynamicpricing/connection/index', ['_nosecret' => true]);
         $this->settings->saveAdminPageUrl($returnUrl);
 
         try {
             $url = $this->connector->start((int) $this->_auth->getUser()->getId(), $returnUrl);
         } catch (ConnectException $e) {
             return $redirect->setPath(
-                'pricingupdater/connection/index',
+                'dynamicpricing/connection/index',
                 ['_query' => [
-                    'pricing_updater_notice' => 'connect_failed',
-                    'pricing_updater_error' => $this->connector->rememberError($e->getMessage()),
+                    'dynamic_pricing_notice' => 'connect_failed',
+                    'dynamic_pricing_error' => $this->connector->rememberError($e->getMessage()),
                 ]]
             );
         }
 
         // The pricing service is the only external address this action sends the browser to.
         if (!$this->connector->isServiceUrl($url)) {
-            return $redirect->setPath('pricingupdater/connection/index');
+            return $redirect->setPath('dynamicpricing/connection/index');
         }
 
         return $redirect->setUrl($url);

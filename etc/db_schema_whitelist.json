@@ -1,5 +1,5 @@
 {
-    "blackaha_pricing_updater_ledger": {
+    "blackaha_dynamic_pricing_ledger": {
         "column": {
             "update_id": true,
             "batch_id": true,
@@ -11,19 +11,19 @@
             "created_at": true
         },
         "index": {
-            "BLACKAHA_PRICING_UPDATER_LEDGER_CREATED_AT": true
+            "BLACKAHA_DYNAMIC_PRICING_LEDGER_CREATED_AT": true
         },
         "constraint": {
             "PRIMARY": true
         }
     },
-    "blackaha_pricing_updater_nonce": {
+    "blackaha_dynamic_pricing_nonce": {
         "column": {
             "nonce": true,
             "seen_at": true
         },
         "index": {
-            "BLACKAHA_PRICING_UPDATER_NONCE_SEEN_AT": true
+            "BLACKAHA_DYNAMIC_PRICING_NONCE_SEEN_AT": true
         },
         "constraint": {
             "PRIMARY": true

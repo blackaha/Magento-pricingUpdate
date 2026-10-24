@@ -4,9 +4,9 @@
  */
 declare(strict_types=1);
 
-namespace Blackaha\PricingUpdater\Model;
+namespace BlackAha\DynamicPricing\Model;
 
-use Blackaha\PricingUpdater\Exception\HttpException;
+use BlackAha\DynamicPricing\Exception\HttpException;
 use Magento\Framework\App\ResourceConnection;
 use Magento\Framework\DB\Adapter\AdapterInterface;
 use Magento\Framework\Lock\LockManagerInterface;
@@ -19,8 +19,8 @@ use Magento\Framework\Lock\LockManagerInterface;
  */
 class Ledger implements NonceRegistryInterface
 {
-    public const LEDGER_TABLE = 'blackaha_pricing_updater_ledger';
-    public const NONCE_TABLE = 'blackaha_pricing_updater_nonce';
+    public const LEDGER_TABLE = 'blackaha_dynamic_pricing_ledger';
+    public const NONCE_TABLE = 'blackaha_dynamic_pricing_nonce';
 
     /** Seconds a nonce is kept, comfortably above the required minimum. */
     public const NONCE_RETENTION = 3600;
@@ -140,7 +140,7 @@ class Ledger implements NonceRegistryInterface
      */
     private function lockName(string $updateId): string
     {
-        return 'blackaha_pu_' . substr(hash('sha256', $updateId), 0, 40);
+        return 'blackaha_dp_' . substr(hash('sha256', $updateId), 0, 40);
     }
 
     /**

@@ -1,15 +1,15 @@
 <?php
 /**
- * GET <store>/pricingupdater/connect/callback?connect_id=&state=&code=|error=access_denied
+ * GET <store>/dynamicpricing/connect/callback?connect_id=&state=&code=|error=access_denied
  */
 declare(strict_types=1);
 
-namespace Blackaha\PricingUpdater\Controller\Connect;
+namespace BlackAha\DynamicPricing\Controller\Connect;
 
-use Blackaha\PricingUpdater\Exception\ConnectException;
-use Blackaha\PricingUpdater\Model\Connector;
-use Blackaha\PricingUpdater\Model\Protocol;
-use Blackaha\PricingUpdater\Model\Settings;
+use BlackAha\DynamicPricing\Exception\ConnectException;
+use BlackAha\DynamicPricing\Model\Connector;
+use BlackAha\DynamicPricing\Model\Protocol;
+use BlackAha\DynamicPricing\Model\Settings;
 use Magento\Framework\App\Action\HttpGetActionInterface;
 use Magento\Framework\App\RequestInterface;
 use Magento\Framework\Controller\Result\Raw;
@@ -58,21 +58,21 @@ class Callback implements HttpGetActionInterface
         try {
             if ('access_denied' === $this->request->getParam('error')) {
                 $this->connector->decline($connectId, $state);
-                $notice = ['pricing_updater_notice' => 'connect_cancelled'];
+                $notice = ['dynamic_pricing_notice' => 'connect_cancelled'];
             } else {
                 $this->connector->complete($connectId, $state, (string) $this->request->getParam('code'));
                 $notice = [];
             }
         } catch (ConnectException $e) {
             $notice = [
-                'pricing_updater_notice' => 'connect_failed',
-                'pricing_updater_error' => $this->connector->rememberError($e->getMessage()),
+                'dynamic_pricing_notice' => 'connect_failed',
+                'dynamic_pricing_error' => $this->connector->rememberError($e->getMessage()),
             ];
         } catch (\Throwable $e) {
             $this->logger->error('connect callback: ' . $e->getMessage());
             $notice = [
-                'pricing_updater_notice' => 'connect_failed',
-                'pricing_updater_error' => $this->connector->rememberError(
+                'dynamic_pricing_notice' => 'connect_failed',
+                'dynamic_pricing_error' => $this->connector->rememberError(
                     (string) __('The connection could not be completed. Please start again, or connect manually.')
                 ),
             ];

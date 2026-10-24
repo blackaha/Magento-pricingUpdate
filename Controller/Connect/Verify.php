@@ -1,12 +1,12 @@
 <?php
 /**
- * GET <store>/pricingupdater/connect/verify?connect_id=&challenge=
+ * GET <store>/dynamicpricing/connect/verify?connect_id=&challenge=
  */
 declare(strict_types=1);
 
-namespace Blackaha\PricingUpdater\Controller\Connect;
+namespace BlackAha\DynamicPricing\Controller\Connect;
 
-use Blackaha\PricingUpdater\Model\Connector;
+use BlackAha\DynamicPricing\Model\Connector;
 use Magento\Framework\App\Action\HttpGetActionInterface;
 use Magento\Framework\App\RequestInterface;
 use Magento\Framework\Controller\Result\Raw;

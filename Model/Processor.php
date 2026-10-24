@@ -4,9 +4,9 @@
  */
 declare(strict_types=1);
 
-namespace Blackaha\PricingUpdater\Model;
+namespace BlackAha\DynamicPricing\Model;
 
-use Blackaha\PricingUpdater\Exception\HttpException;
+use BlackAha\DynamicPricing\Exception\HttpException;
 use Magento\Catalog\Model\Product;
 
 /**

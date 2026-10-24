@@ -4,7 +4,7 @@
  */
 declare(strict_types=1);
 
-namespace Blackaha\PricingUpdater\Exception;
+namespace BlackAha\DynamicPricing\Exception;
 
 /**
  * Carries the HTTP status and a machine-readable code.

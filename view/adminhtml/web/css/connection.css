@@ -1,5 +1,5 @@
-.pricing-updater { max-width: 960px; }
-.pricing-updater-card {
+.dynamic-pricing { max-width: 960px; }
+.dynamic-pricing-card {
     position: relative;
     margin: 0 0 2rem;
     padding: 2.4rem 2.4rem 2rem;
@@ -8,8 +8,8 @@
     border-radius: 4px;
     box-shadow: 0 1px 2px rgba(0, 0, 0, .05);
 }
-.pricing-updater-card--connected { border-left: 4px solid #79a22e; }
-.pricing-updater-card__icon {
+.dynamic-pricing-card--connected { border-left: 4px solid #79a22e; }
+.dynamic-pricing-card__icon {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -20,41 +20,41 @@
     background: #f1f1f1;
     color: #514943;
 }
-.pricing-updater-card__icon--ok { background: #e5efd6; color: #3d6611; }
-.pricing-updater-card__title { margin: 0 0 .8rem; font-size: 2rem; font-weight: 600; }
-.pricing-updater-card__text { margin: 0 0 1.4rem; color: #41362f; }
-.pricing-updater-card__hint { margin: 1.2rem 0 0; color: #777; font-size: 1.2rem; }
-.pricing-updater-card__actions { display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; }
-.pricing-updater-inline-form { display: inline; margin: 0; }
-.pricing-updater-danger { color: #e22626; }
-.pricing-updater-checks { margin: 0 0 1.6rem; padding: 0; list-style: none; }
-.pricing-updater-check { position: relative; margin: .4rem 0; padding-left: 2.2rem; }
-.pricing-updater-check::before { position: absolute; left: 0; font-weight: 700; }
-.pricing-updater-check--ok::before { content: "\2713"; color: #3d6611; }
-.pricing-updater-check--warn::before { content: "!"; color: #eb5202; }
-.pricing-updater-facts {
+.dynamic-pricing-card__icon--ok { background: #e5efd6; color: #3d6611; }
+.dynamic-pricing-card__title { margin: 0 0 .8rem; font-size: 2rem; font-weight: 600; }
+.dynamic-pricing-card__text { margin: 0 0 1.4rem; color: #41362f; }
+.dynamic-pricing-card__hint { margin: 1.2rem 0 0; color: #777; font-size: 1.2rem; }
+.dynamic-pricing-card__actions { display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; }
+.dynamic-pricing-inline-form { display: inline; margin: 0; }
+.dynamic-pricing-danger { color: #e22626; }
+.dynamic-pricing-checks { margin: 0 0 1.6rem; padding: 0; list-style: none; }
+.dynamic-pricing-check { position: relative; margin: .4rem 0; padding-left: 2.2rem; }
+.dynamic-pricing-check::before { position: absolute; left: 0; font-weight: 700; }
+.dynamic-pricing-check--ok::before { content: "\2713"; color: #3d6611; }
+.dynamic-pricing-check--warn::before { content: "!"; color: #eb5202; }
+.dynamic-pricing-facts {
     display: grid;
     grid-template-columns: max-content 1fr;
     gap: .4rem 1.6rem;
     margin: 0 0 1.6rem;
 }
-.pricing-updater-facts dt { font-weight: 600; }
-.pricing-updater-facts dd { margin: 0; }
-.pricing-updater-manual { margin: 0 0 2.4rem; }
-.pricing-updater-manual summary { cursor: pointer; font-weight: 600; margin-bottom: 1rem; }
-.pricing-updater-form { margin-top: 1rem; }
-.pricing-updater-field { margin-bottom: 1.6rem; }
-.pricing-updater-field label { display: block; margin-bottom: .6rem; font-weight: 600; }
-.pricing-updater-field .admin__control-text { max-width: 640px; }
-.pricing-updater-copy-row { display: flex; gap: 1rem; max-width: 760px; }
-.pricing-updater-copy-row .admin__control-text { flex: 1; font-family: monospace; }
-.pricing-updater-heading { margin: 2rem 0 1rem; font-size: 1.8rem; }
-.pricing-updater-badge {
+.dynamic-pricing-facts dt { font-weight: 600; }
+.dynamic-pricing-facts dd { margin: 0; }
+.dynamic-pricing-manual { margin: 0 0 2.4rem; }
+.dynamic-pricing-manual summary { cursor: pointer; font-weight: 600; margin-bottom: 1rem; }
+.dynamic-pricing-form { margin-top: 1rem; }
+.dynamic-pricing-field { margin-bottom: 1.6rem; }
+.dynamic-pricing-field label { display: block; margin-bottom: .6rem; font-weight: 600; }
+.dynamic-pricing-field .admin__control-text { max-width: 640px; }
+.dynamic-pricing-copy-row { display: flex; gap: 1rem; max-width: 760px; }
+.dynamic-pricing-copy-row .admin__control-text { flex: 1; font-family: monospace; }
+.dynamic-pricing-heading { margin: 2rem 0 1rem; font-size: 1.8rem; }
+.dynamic-pricing-badge {
     display: inline-block;
     padding: .2rem .8rem;
     border-radius: 1rem;
     font-size: 1.2rem;
     font-weight: 600;
 }
-.pricing-updater-badge--ok { background: #e5efd6; color: #3d6611; }
-.pricing-updater-badge--failed { background: #fae5e5; color: #a3150f; }
+.dynamic-pricing-badge--ok { background: #e5efd6; color: #3d6611; }
+.dynamic-pricing-badge--failed { background: #fae5e5; color: #a3150f; }

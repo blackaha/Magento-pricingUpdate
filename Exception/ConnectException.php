@@ -4,7 +4,7 @@
  */
 declare(strict_types=1);
 
-namespace Blackaha\PricingUpdater\Exception;
+namespace BlackAha\DynamicPricing\Exception;
 
 /**
  * Carries a short code for the log and a message the administrator can act on.

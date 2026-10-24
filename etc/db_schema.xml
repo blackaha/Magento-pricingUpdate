@@ -4,7 +4,7 @@
     losing a recorded result would let the same update be applied twice.
 -->
 <schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
-    <table name="blackaha_pricing_updater_ledger" resource="default" engine="innodb" comment="Pricing Updater: final result of each update">
+    <table name="blackaha_dynamic_pricing_ledger" resource="default" engine="innodb" comment="Pricing Updater: final result of each update">
         <column xsi:type="varchar" name="update_id" length="64" nullable="false" comment="Update id sent by the pricing service"/>
         <column xsi:type="varchar" name="batch_id" length="64" nullable="false" default="" comment="Batch that concluded the update"/>
         <column xsi:type="varchar" name="sku" length="191" nullable="false" default="" comment="SKU"/>
@@ -16,17 +16,17 @@
         <constraint xsi:type="primary" referenceId="PRIMARY">
             <column name="update_id"/>
         </constraint>
-        <index referenceId="BLACKAHA_PRICING_UPDATER_LEDGER_CREATED_AT" indexType="btree">
+        <index referenceId="BLACKAHA_DYNAMIC_PRICING_LEDGER_CREATED_AT" indexType="btree">
             <column name="created_at"/>
         </index>
     </table>
-    <table name="blackaha_pricing_updater_nonce" resource="default" engine="innodb" comment="Pricing Updater: nonces already received">
+    <table name="blackaha_dynamic_pricing_nonce" resource="default" engine="innodb" comment="Pricing Updater: nonces already received">
         <column xsi:type="varchar" name="nonce" length="32" nullable="false" comment="Nonce"/>
         <column xsi:type="int" name="seen_at" unsigned="true" nullable="false" comment="Unix time"/>
         <constraint xsi:type="primary" referenceId="PRIMARY">
             <column name="nonce"/>
         </constraint>
-        <index referenceId="BLACKAHA_PRICING_UPDATER_NONCE_SEEN_AT" indexType="btree">
+        <index referenceId="BLACKAHA_DYNAMIC_PRICING_NONCE_SEEN_AT" indexType="btree">
             <column name="seen_at"/>
         </index>
     </table>

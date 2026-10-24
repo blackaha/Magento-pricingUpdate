@@ -4,9 +4,9 @@
  */
 declare(strict_types=1);
 
-namespace Blackaha\PricingUpdater\Model;
+namespace BlackAha\DynamicPricing\Model;
 
-use Blackaha\PricingUpdater\Exception\ConnectException;
+use BlackAha\DynamicPricing\Exception\ConnectException;
 use Magento\Framework\App\CacheInterface;
 use Magento\Framework\HTTP\Client\CurlFactory;
 use Psr\Log\LoggerInterface;
@@ -26,10 +26,10 @@ class Connector
 {
     public const CLIENT_ID = 'magento';
 
-    private const CACHE_ATTEMPT = 'blackaha_pu_ca_';
-    private const CACHE_USER = 'blackaha_pu_cu_';
-    private const CACHE_ERROR = 'blackaha_pu_ce_';
-    private const CACHE_TAG = 'BLACKAHA_PRICING_UPDATER';
+    private const CACHE_ATTEMPT = 'blackaha_dp_ca_';
+    private const CACHE_USER = 'blackaha_dp_cu_';
+    private const CACHE_ERROR = 'blackaha_dp_ce_';
+    private const CACHE_TAG = 'BLACKAHA_DYNAMIC_PRICING';
     private const ATTEMPT_TTL = 900;
     private const ERROR_TTL = 600;
     private const HTTP_TIMEOUT = 15;

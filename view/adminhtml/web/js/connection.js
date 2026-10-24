@@ -3,7 +3,7 @@
 
     // Copy the webhook URL to the clipboard.
     document.addEventListener('DOMContentLoaded', function () {
-        var button = document.getElementById('pricing-updater-copy');
+        var button = document.getElementById('dynamic-pricing-copy');
         if (!button) {
             return;
         }

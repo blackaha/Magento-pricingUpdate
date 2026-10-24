@@ -4,9 +4,9 @@
  */
 declare(strict_types=1);
 
-namespace Blackaha\PricingUpdater\Setup;
+namespace BlackAha\DynamicPricing\Setup;
 
-use Blackaha\PricingUpdater\Model\Ledger;
+use BlackAha\DynamicPricing\Model\Ledger;
 use Magento\Framework\Setup\ModuleContextInterface;
 use Magento\Framework\Setup\SchemaSetupInterface;
 use Magento\Framework\Setup\UninstallInterface;
@@ -20,8 +20,8 @@ class Uninstall implements UninstallInterface
 
         $connection->dropTable($setup->getTable(Ledger::LEDGER_TABLE));
         $connection->dropTable($setup->getTable(Ledger::NONCE_TABLE));
-        $connection->delete($setup->getTable('flag'), ['flag_code LIKE ?' => 'blackaha_pricing_updater_%']);
-        $connection->delete($setup->getTable('core_config_data'), ['path LIKE ?' => 'blackaha_pricing_updater/%']);
+        $connection->delete($setup->getTable('flag'), ['flag_code LIKE ?' => 'blackaha_dynamic_pricing_%']);
+        $connection->delete($setup->getTable('core_config_data'), ['path LIKE ?' => 'blackaha_dynamic_pricing/%']);
 
         $setup->endSetup();
     }

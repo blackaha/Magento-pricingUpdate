@@ -4,7 +4,7 @@
  */
 declare(strict_types=1);
 
-namespace Blackaha\PricingUpdater\Controller\Adminhtml\Connection;
+namespace BlackAha\DynamicPricing\Controller\Adminhtml\Connection;
 
 use Magento\Backend\App\Action;
 use Magento\Framework\App\Action\HttpGetActionInterface;
@@ -19,7 +19,7 @@ use Magento\Framework\View\Result\Page;
  */
 class Index extends Action implements HttpGetActionInterface
 {
-    public const ADMIN_RESOURCE = 'Blackaha_PricingUpdater::manage';
+    public const ADMIN_RESOURCE = 'BlackAha_DynamicPricing::manage';
 
     /**
      * @var string[]
@@ -30,7 +30,7 @@ class Index extends Action implements HttpGetActionInterface
     {
         /** @var Page $page */
         $page = $this->resultFactory->create(ResultFactory::TYPE_PAGE);
-        $page->setActiveMenu('Blackaha_PricingUpdater::connection');
+        $page->setActiveMenu('BlackAha_DynamicPricing::connection');
         $page->getConfig()->getTitle()->prepend(__('Pricing Updater'));
 
         return $page;

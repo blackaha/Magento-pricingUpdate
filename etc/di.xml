@@ -1,39 +1,39 @@
 <?xml version="1.0"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
-    <preference for="Blackaha\PricingUpdater\Model\NonceRegistryInterface" type="Blackaha\PricingUpdater\Model\Ledger"/>
+    <preference for="BlackAha\DynamicPricing\Model\NonceRegistryInterface" type="BlackAha\DynamicPricing\Model\Ledger"/>
 
-    <!-- var/log/pricing_updater.log. Never receives a secret. -->
-    <virtualType name="Blackaha\PricingUpdater\Logger\Handler" type="Magento\Framework\Logger\Handler\Base">
+    <!-- var/log/dynamic_pricing.log. Never receives a secret. -->
+    <virtualType name="BlackAha\DynamicPricing\Logger\Handler" type="Magento\Framework\Logger\Handler\Base">
         <arguments>
-            <argument name="fileName" xsi:type="string">/var/log/pricing_updater.log</argument>
+            <argument name="fileName" xsi:type="string">/var/log/dynamic_pricing.log</argument>
         </arguments>
     </virtualType>
-    <virtualType name="Blackaha\PricingUpdater\Logger" type="Magento\Framework\Logger\Monolog">
+    <virtualType name="BlackAha\DynamicPricing\Logger" type="Magento\Framework\Logger\Monolog">
         <arguments>
-            <argument name="name" xsi:type="string">pricing_updater</argument>
+            <argument name="name" xsi:type="string">dynamic_pricing</argument>
             <argument name="handlers" xsi:type="array">
-                <item name="file" xsi:type="object">Blackaha\PricingUpdater\Logger\Handler</item>
+                <item name="file" xsi:type="object">BlackAha\DynamicPricing\Logger\Handler</item>
             </argument>
         </arguments>
     </virtualType>
-    <type name="Blackaha\PricingUpdater\Model\Connector">
+    <type name="BlackAha\DynamicPricing\Model\Connector">
         <arguments>
-            <argument name="logger" xsi:type="object">Blackaha\PricingUpdater\Logger</argument>
+            <argument name="logger" xsi:type="object">BlackAha\DynamicPricing\Logger</argument>
         </arguments>
     </type>
-    <type name="Blackaha\PricingUpdater\Model\Writer">
+    <type name="BlackAha\DynamicPricing\Model\Writer">
         <arguments>
-            <argument name="logger" xsi:type="object">Blackaha\PricingUpdater\Logger</argument>
+            <argument name="logger" xsi:type="object">BlackAha\DynamicPricing\Logger</argument>
         </arguments>
     </type>
-    <type name="Blackaha\PricingUpdater\Controller\Webhook\Index">
+    <type name="BlackAha\DynamicPricing\Controller\Webhook\Index">
         <arguments>
-            <argument name="logger" xsi:type="object">Blackaha\PricingUpdater\Logger</argument>
+            <argument name="logger" xsi:type="object">BlackAha\DynamicPricing\Logger</argument>
         </arguments>
     </type>
-    <type name="Blackaha\PricingUpdater\Controller\Connect\Callback">
+    <type name="BlackAha\DynamicPricing\Controller\Connect\Callback">
         <arguments>
-            <argument name="logger" xsi:type="object">Blackaha\PricingUpdater\Logger</argument>
+            <argument name="logger" xsi:type="object">BlackAha\DynamicPricing\Logger</argument>
         </arguments>
     </type>
 </config>

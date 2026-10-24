@@ -4,9 +4,9 @@
  */
 declare(strict_types=1);
 
-namespace Blackaha\PricingUpdater\Model;
+namespace BlackAha\DynamicPricing\Model;
 
-use Blackaha\PricingUpdater\Exception\HttpException;
+use BlackAha\DynamicPricing\Exception\HttpException;
 
 /**
  * Runs the request checks in their mandatory order and stops at the first failure.
